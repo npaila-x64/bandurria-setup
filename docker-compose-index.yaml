@@ -1,0 +1,46 @@
+version: "3.9"
+services:
+  index-db:
+    image: postgres:15.4-alpine
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 1s
+      retries: 10
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - index-db:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    networks:
+      - index
+
+  index:
+    image: npailax64/asistente_ia-index_service
+    depends_on:
+      index-db:
+        condition: service_healthy
+    environment:
+      OPENAI_API_KEY: ${SECRET_KEY}
+      DB_HOST: index-db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: postgres
+    ports:
+      - "10000:10000"
+    networks:
+      - index
+
+volumes:
+  index-db:
+    driver: local
+
+networks:
+  index:
+    name: chatbot_network
+    external: true
