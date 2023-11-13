@@ -3,27 +3,23 @@ services:
   investigacion:
     image: npailax64/asistente_ia-chatbot_service
     environment:
-      INDEX_MICROSERVICE_HOSTNAME: 'index'
       OPENAI_API_KEY: ${SECRET_KEY}
-      AI_VENDOR: 'openai'
       DEBUG: 'false'
     ports:
-      - "1234:1234"
+      - "10101:8080"
     networks:
-      - chatbot
+      - chatbot_network
   chatbot1:
     image: npailax64/asistente_ia-chatbot_service
     environment:
-      INDEX_MICROSERVICE_HOSTNAME: 'index'
       OPENAI_API_KEY: ${SECRET_KEY}
-      AI_VENDOR: 'openai'
       DEBUG: 'false'
     ports:
-      - "1235:1234"
+      - "10102:8080"
     networks:
-      - chatbot
+      - chatbot_network
 
 networks:
- chatbot:
+ chatbot_network:
     name: chatbot_network
     external: true

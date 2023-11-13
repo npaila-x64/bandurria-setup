@@ -2,8 +2,6 @@ version: "3.9"
 services:
   api-gateway:
     image: npailax64/asistente_ia-webserver
-    environment:
-      CHATBOT_SERVICE_URL: 'chatbot'
     ports:
       - "20000:20000"
     networks:
