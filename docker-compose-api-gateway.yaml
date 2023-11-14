@@ -5,9 +5,9 @@ services:
     ports:
       - "20000:20000"
     networks:
-      - api-gateway
+      - chatbot_network
 
 networks:
-  api-gateway:
+  chatbot_network:
     name: chatbot_network
     external: true

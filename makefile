@@ -18,6 +18,8 @@ delete_network: down
 up: create_network
 		@echo "Starting Index Service..."
 		sudo docker-compose -f docker-compose-index.yaml up -d
+		@echo "Starting Chat Log Service..."
+		sudo docker-compose -f docker-compose-chat-log.yaml up -d
 		@echo "Starting Chatbot Service..."
 		sudo docker-compose -f docker-compose-chatbot.yaml up -d
 		@echo "Starting API Gateway..."
@@ -31,6 +33,8 @@ up: create_network
 down:
 		@echo "Stopping Index Service..."
 		sudo docker-compose -f docker-compose-index.yaml down --volumes
+		@echo "Stopping Chat Log Service..."
+		sudo docker-compose -f docker-compose-chat-log.yaml down
 		@echo "Stopping Chatbot Service..."
 		sudo docker-compose -f docker-compose-chatbot.yaml down
 		@echo "Stopping API Gateway..."
@@ -44,6 +48,8 @@ down:
 pull:
 		@echo "Building Index Service..."
 		sudo docker pull npailax64/asistente_ia-index_service
+		@echo "Building Chat Log Service..."
+		sudo docker pull npailax64/asistente_ia-chat_log_service
 		@echo "Building Chatbot Service..."
 		sudo docker pull npailax64/asistente_ia-chatbot_service
 		@echo "Building API Gateway..."
