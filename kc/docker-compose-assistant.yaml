@@ -1,0 +1,47 @@
+version: "3.9"
+services:
+  chatbot1-db:
+    image: postgres:15.4-alpine
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 1s
+      retries: 10
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '10112:5432'
+    volumes: 
+      - chatbot1-db:/var/lib/postgresql/data
+      - ./db/assistant-init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    networks:
+      - komatsu_assistant_network
+  
+  chatbot1:
+    image: npailax64/asistente_ia-assistant_service
+    depends_on:
+      chatbot1-db:
+        condition: service_healthy
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      DEBUG: 'false'
+      DB_HOST: chatbot1-db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: postgres
+    ports:
+      - "10102:8080"
+    networks:
+      - komatsu_assistant_network
+
+volumes:
+  chatbot1-db:
+    driver: local
+
+networks:
+ komatsu_assistant_network:
+    name: komatsu_assistant_network
+    external: true

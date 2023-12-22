@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  api-gateway:
+    image: npailax64/asistente_ia-api_gateway
+    ports:
+      - "20000:20000"
+    networks:
+      - komatsu_assistant_network
+
+networks:
+  komatsu_assistant_network:
+    name: komatsu_assistant_network
+    external: true

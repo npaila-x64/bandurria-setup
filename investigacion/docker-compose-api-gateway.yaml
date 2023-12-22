@@ -5,9 +5,9 @@ services:
     ports:
       - "20000:20000"
     networks:
-      - chatbot_network
+      - assistant_network
 
 networks:
-  chatbot_network:
-    name: chatbot_network
+  assistant_network:
+    name: assistant_network
     external: true

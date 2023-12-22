@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  chat-log:
+    image: npailax64/asistente_ia-chat_log_service
+    ports:
+      - "10200:8080"
+    depends_on:
+      - chat-log-mongo
+    networks:
+      - assistant_network
+
+  chat-log-mongo:
+    image: mongo:4.4.18
+    ports:
+      - "10201:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - chat-log-mongodata:/data/db
+    networks:
+      - assistant_network
+
+volumes:
+  chat-log-mongodata:
+
+networks:
+  assistant_network:
+    name: assistant_network
+    external: true

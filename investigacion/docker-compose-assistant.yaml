@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  index-db:
+  investigacion-db:
     image: postgres:15.4-alpine
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
@@ -12,35 +12,32 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - '10001:5432'
-    volumes:
-      - index-db:/var/lib/postgresql/data
-      - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - '10112:5432'
+    volumes: 
+      - investigacion-db:/var/lib/postgresql/data
+      - ./db/assistant-init.sql:/docker-entrypoint-initdb.d/create_tables.sql
     networks:
-      - chatbot_network
-
-  index:
-    image: npailax64/asistente_ia-index_service
+      - assistant_network
+  
+  investigacion:
+    image: npailax64/asistente_ia-assistant_service
     depends_on:
-      index-db:
+      investigacion-db:
         condition: service_healthy
     environment:
-      OPENAI_API_KEY: ${SECRET_KEY}
-      DB_HOST: index-db
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      DEBUG: 'false'
+      DB_HOST: investigacion-db
       DB_PORT: 5432
       DB_USER: postgres
       DB_PASSWORD: postgres
       DB_NAME: postgres
     ports:
-      - "10000:8080"
+      - "10102:8080"
     networks:
-      - chatbot_network
-
-volumes:
-  index-db:
-    driver: local
+      - assistant_network
 
 networks:
-  chatbot_network:
-    name: chatbot_network
+ assistant_network:
+    name: assistant_network
     external: true
