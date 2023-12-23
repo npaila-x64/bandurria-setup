@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  investigacion-db:
+  assistant-db:
     image: postgres:15.4-alpine
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
@@ -14,20 +14,21 @@ services:
     ports:
       - '10112:5432'
     volumes: 
-      - investigacion-db:/var/lib/postgresql/data
+      - assistant-db:/var/lib/postgresql/data
       - ./db/assistant-init.sql:/docker-entrypoint-initdb.d/create_tables.sql
     networks:
       - assistant_network
   
-  investigacion:
+  assistant:
+    hostname: investigacion
     image: npailax64/asistente_ia-assistant_service
     depends_on:
-      investigacion-db:
+      assistant-db:
         condition: service_healthy
     environment:
-      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_API_KEY: ${SECRET_KEY}
       DEBUG: 'false'
-      DB_HOST: investigacion-db
+      DB_HOST: assistant-db
       DB_PORT: 5432
       DB_USER: postgres
       DB_PASSWORD: postgres
@@ -39,5 +40,4 @@ services:
 
 networks:
  assistant_network:
-    name: assistant_network
     external: true

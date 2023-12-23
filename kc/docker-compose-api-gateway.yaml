@@ -9,5 +9,4 @@ services:
 
 networks:
   komatsu_assistant_network:
-    name: komatsu_assistant_network
     external: true

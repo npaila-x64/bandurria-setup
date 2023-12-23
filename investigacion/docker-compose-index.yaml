@@ -42,5 +42,4 @@ volumes:
 
 networks:
   assistant_network:
-    name: assistant_network
     external: true
