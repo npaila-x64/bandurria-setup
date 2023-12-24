@@ -17,7 +17,7 @@ services:
       - index-db:/var/lib/postgresql/data
       - ./db/index-init.sql:/docker-entrypoint-initdb.d/create_tables.sql
     networks:
-      - komatsu_assistant_network
+      - kc_assistant_network
 
   index:
     image: npailax64/asistente_ia-index_service
@@ -34,12 +34,12 @@ services:
     ports:
       - "10000:8080"
     networks:
-      - komatsu_assistant_network
+      - kc_assistant_network
 
 volumes:
   index-db:
     driver: local
 
 networks:
-  komatsu_assistant_network:
+  kc_assistant_network:
     external: true

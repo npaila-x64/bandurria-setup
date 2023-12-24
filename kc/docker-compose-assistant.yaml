@@ -17,7 +17,7 @@ services:
       - assistant-db:/var/lib/postgresql/data
       - ./db/assistant-init.sql:/docker-entrypoint-initdb.d/create_tables.sql
     networks:
-      - komatsu_assistant_network
+      - kc_assistant_network
   
   assistant:
     hostname: chatbot1
@@ -36,12 +36,12 @@ services:
     ports:
       - "10102:8080"
     networks:
-      - komatsu_assistant_network
+      - kc_assistant_network
 
 volumes:
   assistant-db:
     driver: local
 
 networks:
- komatsu_assistant_network:
+ kc_assistant_network:
     external: true

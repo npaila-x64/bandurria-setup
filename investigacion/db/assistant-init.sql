@@ -1,7 +1,7 @@
 
 -- Create table for llms
 CREATE TABLE llm (
-	llm_id TEXT PRIMARY KEY,
+	id TEXT PRIMARY KEY,
 	model VARCHAR(255),
 	temperature NUMERIC(2,1),
 	max_tokens INTEGER,
@@ -13,21 +13,19 @@ CREATE TABLE llm (
 
 -- Create table for query engines
 CREATE TABLE query_engine (
-	query_engine_id TEXT PRIMARY KEY,
-	tool_name VARCHAR(255),
+	tool_name VARCHAR(255) PRIMARY KEY,
 	tool_description VARCHAR(255),
-	index_id VARCHAR(255),
 	index_type VARCHAR(255),
 	system_prompt VARCHAR(255),
 	similarity_top_k INTEGER,
 	llm_id TEXT,
 	CONSTRAINT fk_llm
         FOREIGN KEY(llm_id)
-            REFERENCES llm(llm_id)
+            REFERENCES llm(id)
 );
 
 INSERT INTO llm(
-	llm_id,
+	id,
 	model,
 	temperature,
 	max_tokens,
@@ -47,7 +45,7 @@ INSERT INTO llm(
 );
 
 INSERT INTO llm(
-	llm_id,
+	id,
 	model,
 	temperature,
 	max_tokens,
@@ -68,19 +66,15 @@ INSERT INTO llm(
 
 -- Insert data into query engines
 INSERT INTO query_engine(
-	query_engine_id,
 	tool_name,
 	tool_description,
-	index_id,
 	index_type,
 	system_prompt,
 	similarity_top_k,
 	llm_id
 ) VALUES (
 	'storage_aceite_desechado',
-	'storage_aceite_desechado',
 	'Provee información relacionada al HDS sobre aceites desechados. Use a detailed plain text question as input to the tool.',
-	'storage_aceite_desechado',
 	'vector',
 	'Procura siempre mostrar los enlaces https://i.imgur.com/ que tengas acceso.',
 	4,

@@ -1,20 +1,20 @@
 -- Create table for "indexes"
 CREATE TABLE indexes (
-        index_id TEXT PRIMARY KEY,
-        description VARCHAR(255),
-        llm_vendor VARCHAR(60)
+        id TEXT PRIMARY KEY,
+        type VARCHAR(255),
+        description VARCHAR(255)
 );
 
 -- Create table for source
-CREATE TABLE sources (
-        source_id TEXT PRIMARY KEY,
+CREATE TABLE source (
+        id TEXT PRIMARY KEY,
         filename TEXT,
         filetype VARCHAR(60),
         relative_path VARCHAR(255),
     index_id TEXT,
     CONSTRAINT fk_index
         FOREIGN KEY(index_id)
-            REFERENCES indexes(index_id)
+            REFERENCES indexes(id)
 );
 
 -- Create table for document
@@ -26,7 +26,6 @@ CREATE TABLE documents (
 );
 
 -- Insert data into indexes
-INSERT INTO indexes(index_id, description, llm_vendor)
+INSERT INTO indexes(id, type, description)
 VALUES
-('komatsu', 'data from komatsu', 'openai'),
-('empty_index', 'empty index intended to be used as placeholder', 'openai');
+('kc', 'vector', 'data from komatsu');

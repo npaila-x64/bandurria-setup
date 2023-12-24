@@ -4,9 +4,11 @@ services:
     image: npailax64/asistente_ia-assistant_app
     ports:
       - "8080:80"
+    environment:
+      API_GATEWAY_URL: "https://kc.smartaraucania.org"
     networks:
-      - komatsu_assistant_network
+      - kc_assistant_network
 
 networks:
-  komatsu_assistant_network:
+  kc_assistant_network:
     external: true

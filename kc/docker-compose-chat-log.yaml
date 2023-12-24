@@ -7,7 +7,7 @@ services:
     depends_on:
       - chat-log-mongo
     networks:
-      - komatsu_assistant_network
+      - kc_assistant_network
 
   chat-log-mongo:
     image: mongo:4.4.18
@@ -19,11 +19,11 @@ services:
     volumes:
       - chat-log-mongodata:/data/db
     networks:
-      - komatsu_assistant_network
+      - kc_assistant_network
 
 volumes:
   chat-log-mongodata:
 
 networks:
-  komatsu_assistant_network:
+  kc_assistant_network:
     external: true

@@ -1,20 +1,20 @@
 -- Create table for "indexes"
 CREATE TABLE indexes (
-        index_id TEXT PRIMARY KEY,
-        description VARCHAR(255),
-        llm_vendor VARCHAR(60)
+        id TEXT PRIMARY KEY,
+        type VARCHAR(255),
+        description VARCHAR(255)
 );
 
 -- Create table for source
-CREATE TABLE sources (
-        source_id TEXT PRIMARY KEY,
+CREATE TABLE source (
+        id TEXT PRIMARY KEY,
         filename TEXT,
         filetype VARCHAR(60),
         relative_path VARCHAR(255),
     index_id TEXT,
     CONSTRAINT fk_index
         FOREIGN KEY(index_id)
-            REFERENCES indexes(index_id)
+            REFERENCES indexes(id)
 );
 
 -- Create table for document
@@ -30,14 +30,13 @@ CREATE TABLE documents (
 );
 
 -- Insert data into indexes
-INSERT INTO indexes(index_id, description, llm_vendor)
+INSERT INTO indexes(id, type, description)
 VALUES
-('investigacion', 'data from investigacion.ufro.cl', 'openai'),
-('ufro', 'data from ufro.cl', 'openai'),
-('aguas', 'data from aguas araucania', 'openai'),
-('empty_index', 'empty index intended to be used as placeholder', 'openai');
+('investigacion', 'vector', 'data from investigacion.ufro.cl'),
+('ufro', 'vector', 'data from ufro.cl'),
+('aguas', 'vector', 'data from aguas araucania');
 
-INSERT INTO sources(source_id, filename, filetype, relative_path, index_id)
+INSERT INTO sources(id, filename, filetype, relative_path, index_id)
 VALUES
 ('8459d825-4bc2-4fed-af73-1cab80d3dd04', 'apoyos.txt', 'text/plain', '/', 'investigacion'),
 ('6299fd74-7157-4557-87fa-0a8425923ec5', 'concursos.txt', 'text/plain', '/', 'investigacion'),

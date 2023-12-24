@@ -5,8 +5,8 @@ services:
     ports:
       - "20000:20000"
     networks:
-      - komatsu_assistant_network
+      - kc_assistant_network
 
 networks:
-  komatsu_assistant_network:
+  kc_assistant_network:
     external: true
