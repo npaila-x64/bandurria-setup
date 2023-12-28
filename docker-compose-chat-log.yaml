@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   chat-log:
-    image: npailax64/asistente_ia-chat_log_service
+    image: ${IMAGE_REPO}/asistente_ia-chat_log_service
     ports:
       - "10200:8080"
     depends_on:
@@ -26,4 +26,5 @@ volumes:
 
 networks:
   assistant_network:
-    external: true
+      external: true
+      name: ${NETWORK_NAME}

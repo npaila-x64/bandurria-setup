@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   api-gateway:
-    image: npailax64/asistente_ia-api_gateway
+    image: ${IMAGE_REPO}/asistente_ia-api_gateway
     ports:
       - "20000:20000"
     networks:
@@ -9,4 +9,5 @@ services:
 
 networks:
   assistant_network:
-    external: true
+      external: true
+      name: ${NETWORK_NAME}

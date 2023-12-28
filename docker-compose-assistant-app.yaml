@@ -1,14 +1,15 @@
 version: "3.9"
 services:
   assistant-app:
-    image: npailax64/asistente_ia-assistant_app
+    image: ${IMAGE_REPO}/asistente_ia-assistant_app
     ports:
       - "8080:80"
     environment:
-      API_GATEWAY_URL: "https://bandurria.smartaraucania.org"
+      - API_URL=${API_URL}
     networks:
       - assistant_network
 
 networks:
   assistant_network:
-    external: true
+      external: true
+      name: ${NETWORK_NAME}
