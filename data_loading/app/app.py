@@ -7,6 +7,8 @@ def post_zip_file(subdirectory_path, filename):
     zip_file_path = f"{subdirectory_path}/{filename}.zip"
     specs = read_json_file(f"{subdirectory_path}/specs.json")
 
+    print(subdirectory_path)
+
     # Define the form data payload, including the file
     form_data = {
         'id': (None, specs.get('id')),
@@ -18,7 +20,7 @@ def post_zip_file(subdirectory_path, filename):
     response = requests.post('http://localhost:10000/indices', files=form_data)
     print(f"Posted {zip_file_path}: {response.status_code}, {response.text}")
 
-folder_path = 'indices'
+folder_path = 'indices/kc'
 
 def get_immediate_subdirectories(a_dir):
     return [name for name in os.listdir(a_dir)
@@ -27,3 +29,5 @@ def get_immediate_subdirectories(a_dir):
 for subdirectory_name in get_immediate_subdirectories(folder_path):
     subdirectory_path = f"{folder_path}/{subdirectory_name}"
     post_zip_file(subdirectory_path, subdirectory_name)
+
+response = requests.post('http://localhost:10102/retrieve-indices')
