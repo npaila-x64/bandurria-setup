@@ -1,0 +1,5 @@
+{
+    "id": "storage_aceite_desechado",
+    "type": "vector",
+    "description": "Provee información relacionada al HDS sobre los aceites desechados."
+}

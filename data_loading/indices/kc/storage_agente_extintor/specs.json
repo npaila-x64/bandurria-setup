@@ -1,0 +1,5 @@
+{
+    "id": "storage_agente_extintor",
+    "type": "vector",
+    "description": "Provee información relacionada al HDS sobre el agente extintor de incendios FORAY."
+}

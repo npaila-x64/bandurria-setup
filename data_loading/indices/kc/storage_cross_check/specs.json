@@ -1,0 +1,5 @@
+{
+    "id": "storage_cross_check",
+    "type": "vector",
+    "description": "Provee información relacionada al HDS sobre Dykem Cross-Check."
+}

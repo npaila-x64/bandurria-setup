@@ -1,0 +1,5 @@
+{
+    "id": "storage_limpiador_contacto",
+    "type": "vector",
+    "description": "Provee información relacionada al HDS sobre el limpiador contacto eléctrico."
+}

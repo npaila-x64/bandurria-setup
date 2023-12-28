@@ -1,0 +1,5 @@
+{
+    "id": "storage_aire_comprimido",
+    "type": "vector",
+    "description": "Provee información relacionada al HDS sobre el aire comprimido BLOWING PLUS."
+}
