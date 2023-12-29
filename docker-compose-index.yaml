@@ -12,7 +12,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - '10001:5432'
+      - ${INDEX_DATABASE_EXTERNAL_PORT}:5432
     volumes:
       - index-db:/var/lib/postgresql/data
       - ./db/index-init.sql:/docker-entrypoint-initdb.d/create_tables.sql
@@ -32,7 +32,7 @@ services:
       DB_PASSWORD: postgres
       DB_NAME: postgres
     ports:
-      - "10000:8080"
+      - ${INDEX_SERVICE_EXTERNAL_PORT}:8080
     networks:
       - assistant_network
 

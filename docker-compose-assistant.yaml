@@ -12,7 +12,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - '10112:5432'
+      - ${ASSISTANT_DATABASE_EXTERNAL_PORT}:5432
     volumes: 
       - assistant-db:/var/lib/postgresql/data
       - ./db/assistant-init.sql:/docker-entrypoint-initdb.d/create_tables.sql
@@ -20,7 +20,7 @@ services:
       - assistant_network
   
   assistant:
-    hostname: investigacion
+    hostname: ${ASSISTANT_SERVICE_HOSTNAME}
     image: ${IMAGE_REPO}/asistente_ia-assistant_service
     depends_on:
       assistant-db:
@@ -34,7 +34,7 @@ services:
       DB_PASSWORD: postgres
       DB_NAME: postgres
     ports:
-      - "10102:8080"
+      - ${ASSISTANT_SERVICE_EXTERNAL_PORT}:8080
     networks:
       - assistant_network
 

@@ -3,7 +3,7 @@ services:
   assistant-app:
     image: ${IMAGE_REPO}/asistente_ia-assistant_app
     ports:
-      - "8080:80"
+      - ${ASSISTANT_APP_EXTERNAL_PORT}:80
     environment:
       - API_URL=${API_URL}
     networks:

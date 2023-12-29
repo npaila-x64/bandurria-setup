@@ -3,7 +3,7 @@ services:
   api-gateway:
     image: ${IMAGE_REPO}/asistente_ia-api_gateway
     ports:
-      - "20000:20000"
+      - ${API_GATEWAY_SERVICE_EXTERNAL_PORT}:20000
     networks:
       - assistant_network
 
