@@ -39,11 +39,11 @@ down:
 .PHONY: pull
 pull:
 		@echo "Building services..."
-		sudo docker pull $(IMAGE_REPO)/asistente_ia-index_service
-		sudo docker pull $(IMAGE_REPO)/asistente_ia-chat_log_service
-		sudo docker pull $(IMAGE_REPO)/asistente_ia-assistant_service
-		sudo docker pull $(IMAGE_REPO)/asistente_ia-api_gateway
-		sudo docker pull $(IMAGE_REPO)/asistente_ia-assistant_app
+		sudo docker pull $(IMAGE_REPO)/assistant-index_service
+		sudo docker pull $(IMAGE_REPO)/assistant-chat_log_service
+		sudo docker pull $(IMAGE_REPO)/assistant-assistant_service
+		sudo docker pull $(IMAGE_REPO)/assistant-api_gateway_service
+		sudo docker pull $(IMAGE_REPO)/assistant-assistant_app
 		@echo "All services built."
 
 # Recreate all services

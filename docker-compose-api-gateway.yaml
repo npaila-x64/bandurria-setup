@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   api-gateway:
-    image: ${IMAGE_REPO}/asistente_ia-api_gateway
+    image: ${IMAGE_REPO}/assistant-api_gateway_service
     ports:
       - ${API_GATEWAY_SERVICE_EXTERNAL_PORT}:20000
     networks:

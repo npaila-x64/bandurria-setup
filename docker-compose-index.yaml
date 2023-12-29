@@ -20,7 +20,7 @@ services:
       - assistant_network
 
   index:
-    image: ${IMAGE_REPO}/asistente_ia-index_service
+    image: ${IMAGE_REPO}/assistant-index_service
     depends_on:
       index-db:
         condition: service_healthy

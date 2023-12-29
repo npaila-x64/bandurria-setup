@@ -21,7 +21,7 @@ services:
   
   assistant:
     hostname: ${ASSISTANT_SERVICE_HOSTNAME}
-    image: ${IMAGE_REPO}/asistente_ia-assistant_service
+    image: ${IMAGE_REPO}/assistant-assistant_service
     depends_on:
       assistant-db:
         condition: service_healthy
